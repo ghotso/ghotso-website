@@ -24,8 +24,8 @@ export default function ContactContent() {
       icon: '💼',
     },
     {
-      name: t('twitter'),
-      url: 'https://twitter.com/ghotso',
+      name: t('x'),
+      url: 'https://x.com/ghotso_dev',
       icon: '🐦',
     },
   ];
