@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "legal": "Legal"
+  },
+  "home": {
+    "hero": {
+      "headline": "Hey, I'm ghotso 👋",
+      "subline": "Tech enthusiast, self-taught developer & automation nerd",
+      "paragraph": "I'm a self-taught developer with a passion for automation, APIs, and building cool stuff. I love anime & Japanese culture, enjoy gaming, and spend my time working on home server setups, monitoring solutions, and fun side projects. I work with Python, React, Node.js APIs, and I'm always learning and building something new.",
+      "viewProjects": "View Projects",
+      "github": "GitHub"
+    },
+    "featuredProjects": {
+      "title": "Featured Projects",
+      "subtitle": "Some of my recent work"
+    },
+    "whatILike": {
+      "title": "What I Like to Work On",
+      "subtitle": "Technologies and topics that excite me"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "A bit about my journey and interests",
+    "journey": {
+      "title": "My Journey",
+      "content": "I'm a self-taught developer who fell in love with coding through curiosity and a drive to automate everything. My journey started with simple scripts and has evolved into building complex systems, APIs, and full-stack applications."
+    },
+    "interests": {
+      "title": "What Drives Me",
+      "content": "I'm fascinated by automation workflows, API design, and home server setups. I enjoy tweaking systems to be neat and efficient, exploring new frameworks, and building both practical tools and fun side projects. When I'm not coding, I'm probably watching anime, gaming, or listening to music while working on the next project."
+    },
+    "funFacts": {
+      "title": "Fun Facts",
+      "items": [
+        "Big fan of anime and Japanese pop culture",
+        "Enjoys gaming and gaming-inspired projects",
+        "Codes with music in the background",
+        "Loves tweaking systems for optimal performance",
+        "Always exploring new frameworks and ideas"
+      ]
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "A collection of things I've built",
+    "viewProject": "View Project",
+    "viewCode": "View Code",
+    "tags": {
+      "gaming": "Gaming",
+      "fun": "Fun",
+      "anime": "Anime-inspired",
+      "automation": "Automation",
+      "api": "API",
+      "monitoring": "Monitoring",
+      "home-server": "Home Server",
+      "media": "Media Server"
+    },
+    "status": {
+      "active": "Active",
+      "wip": "Work in Progress",
+      "maintained": "Maintained"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Let's connect!",
+    "description": "Feel free to reach out via email or connect with me on these platforms:",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "legal": {
+    "title": "Legal Notice",
+    "imprint": {
+      "title": "Imprint",
+      "content": "According to § 25 Abs. 5 MedienG (Austrian Media Act)\n\nMedia Owner:\nMichael David Guggenbichler\n1220 Wien\nAustria\n\nContact:\nEmail: contact@ghotso.dev\n\nThis is a personal, non-commercial portfolio website that presents open-source projects and does not influence public opinion."
+    },
+    "dataProtection": {
+      "title": "Data Protection",
+      "content": "This website does not collect, process, or store any personal data. No cookies, analytics, tracking, or third-party services are used. No contact forms or data collection mechanisms are implemented."
+    }
+  },
+  "common": {
+    "backToHome": "Back to Home",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  }
+}
+
