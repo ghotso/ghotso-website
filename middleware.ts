@@ -21,13 +21,13 @@ export default function middleware(request: NextRequest) {
   return intlMiddleware(request);
 }
 
+// Only run middleware in dev mode (not for static export)
+// Next.js doesn't support conditional expressions in config, so we use a simple matcher
+// In production, the middleware won't be used anyway due to static export
 export const config = {
-  // Only run middleware in dev mode (not for static export)
-  matcher: process.env.NODE_ENV === 'production' 
-    ? [] // Skip in production (static export)
-    : [
-        // Match all pathnames
-        '/(.*)',
-      ],
+  matcher: [
+    // Match all pathnames except static files
+    '/((?!api|_next/static|_next/image|_vercel|.*\\.).*)',
+  ],
 };
 

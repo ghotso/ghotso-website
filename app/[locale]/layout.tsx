@@ -11,6 +11,7 @@ import { generateMetadata } from './metadata';
 export { generateMetadata };
 
 export const dynamicParams = false;
+export const dynamic = 'force-static';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
