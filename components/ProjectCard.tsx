@@ -17,6 +17,19 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const t = useTranslations('projects');
 
+  // Extract repo name from GitHub URL
+  const getRepoName = (githubUrl?: string): string | null => {
+    if (!githubUrl) return null;
+    const match = githubUrl.match(/github\.com\/ghotso\/([^/]+)/);
+    return match ? match[1] : null;
+  };
+
+  const repoName = getRepoName(project.githubUrl);
+
+  // Projects that should not show version badge
+  const projectsWithoutVersion = ['PrioBox', 'ShelfLife'];
+  const showVersionBadge = repoName && !projectsWithoutVersion.includes(repoName);
+
   const statusColors = {
     active: 'bg-success/20 text-success border-success/30',
     wip: 'bg-warning/20 text-warning border-warning/30',
@@ -46,6 +59,24 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </span>
         ))}
       </div>
+
+      {/* Shields badges */}
+      {repoName && (
+        <div className="flex items-center gap-2 mt-3 mb-4">
+          {showVersionBadge && (
+            <img
+              src={`https://shields.ghotso.dev/github/v/release/ghotso/${repoName}?label=version&color=C7FF33`}
+              alt={`Version badge for ${project.title}`}
+              className="h-5"
+            />
+          )}
+          <img
+            src={`https://shields.ghotso.dev/github/last-commit/ghotso/${repoName}?color=3FD7FF`}
+            alt={`Last commit badge for ${project.title}`}
+            className="h-5"
+          />
+        </div>
+      )}
 
       <div className="flex gap-4">
         {project.projectUrl && (
