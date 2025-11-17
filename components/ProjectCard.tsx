@@ -1,6 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
+import ScaleOnHover from './animations/ScaleOnHover';
 
 interface ProjectCardProps {
   project: {
@@ -37,7 +39,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   };
 
   return (
-    <div className="group bg-ghotso-panel rounded-2xl p-6 md:p-8 border border-white/5 hover:border-ghotso-accent/20 transition-all duration-300 hover:shadow-glow-accent hover:-translate-y-1">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      className="group bg-ghotso-panel rounded-2xl p-6 md:p-8 border border-white/5 hover:border-ghotso-accent/20 transition-all duration-300 hover:shadow-glow-accent"
+    >
       <div className="flex items-start justify-between mb-4">
         <h3 className="text-xl font-bold text-ghotso-primary">{project.title}</h3>
         <span
@@ -80,53 +89,61 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       <div className="flex gap-4">
         {project.projectUrl && (
-          <a
-            href={project.projectUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/link text-sm text-ghotso-accent hover:text-ghotso-primary transition-all duration-200 inline-flex items-center"
-          >
-            <span>{t('viewProject')}</span>
-            <svg
-              className="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <ScaleOnHover scale={1.05}>
+            <a
+              href={project.projectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/link text-sm text-ghotso-accent hover:text-ghotso-primary transition-all duration-200 inline-flex items-center"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </a>
+              <span>{t('viewProject')}</span>
+              <motion.svg
+                className="ml-1 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                whileHover={{ x: 4 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </motion.svg>
+            </a>
+          </ScaleOnHover>
         )}
         {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/link text-sm text-ghotso-accent hover:text-ghotso-primary transition-all duration-200 inline-flex items-center"
-          >
-            <span>{t('viewCode')}</span>
-            <svg
-              className="ml-1 w-4 h-4 transition-transform group-hover/link:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <ScaleOnHover scale={1.05}>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/link text-sm text-ghotso-accent hover:text-ghotso-primary transition-all duration-200 inline-flex items-center"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </a>
+              <span>{t('viewCode')}</span>
+              <motion.svg
+                className="ml-1 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                whileHover={{ x: 4 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </motion.svg>
+            </a>
+          </ScaleOnHover>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

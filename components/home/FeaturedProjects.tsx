@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { motion } from 'framer-motion';
 import ProjectCard from '../ProjectCard';
 import FadeIn from '../animations/FadeIn';
 import StaggerChildren from '../animations/StaggerChildren';
@@ -67,25 +68,32 @@ export default function FeaturedProjects() {
 
         <FadeIn delay={0.8} direction="up">
           <div className="text-center">
-            <Link
-              href="/projects"
-              className="group inline-flex items-center text-ghotso-accent hover:text-ghotso-primary transition-all duration-200 font-medium"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <span>{tProjects('viewProject')}</span>
-              <svg
-                className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <Link
+                href="/projects"
+                className="group inline-flex items-center text-ghotso-accent hover:text-ghotso-primary transition-all duration-200 font-medium"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
+                <span>{tProjects('viewProject')}</span>
+                <motion.svg
+                  className="ml-2 w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </motion.svg>
+              </Link>
+            </motion.div>
           </div>
         </FadeIn>
       </div>

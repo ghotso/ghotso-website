@@ -1,8 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
 import FadeIn from '../animations/FadeIn';
 import StaggerChildren from '../animations/StaggerChildren';
+import ScaleOnHover from '../animations/ScaleOnHover';
 
 export default function ContactContent() {
   const t = useTranslations('contact');
@@ -48,24 +50,40 @@ export default function ContactContent() {
         <StaggerChildren staggerDelay={0.15}>
           <div className="max-w-2xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {socialLinks.map((link) => (
-                <a
+              {socialLinks.map((link, index) => (
+                <motion.a
                   key={link.name}
                   href={link.url}
                   target={link.url.startsWith('mailto:') ? undefined : '_blank'}
                   rel={link.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                  className="group bg-ghotso-panel rounded-2xl p-8 border border-white/5 hover:border-ghotso-accent/40 hover:shadow-glow-accent hover:-translate-y-1 active:scale-95 transition-all duration-300 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.4 }}
+                  whileHover={{ 
+                    y: -8,
+                    boxShadow: '0 10px 30px rgba(62, 220, 255, 0.3)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group bg-ghotso-panel rounded-2xl p-8 border border-white/5 hover:border-ghotso-accent/40 hover:shadow-glow-accent transition-all duration-300 text-center"
                 >
-                  <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                  <motion.div 
+                    className="text-4xl mb-4"
+                    whileHover={{ 
+                      scale: 1.2,
+                      rotate: [0, -10, 10, -10, 10, 0],
+                    }}
+                    transition={{ duration: 0.5 }}
+                  >
                     {link.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-semibold text-ghotso-primary mb-2 group-hover:text-ghotso-accent transition-colors">
                     {link.name}
                   </h3>
                   <p className="text-sm text-ghotso-text-muted">
                     {link.url.replace('mailto:', '').replace('https://', '')}
                   </p>
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>

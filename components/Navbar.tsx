@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const t = useTranslations('nav');
@@ -55,23 +56,31 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                  isActive(item.href)
-                    ? 'text-ghotso-primary bg-ghotso-bg-secondary/50'
-                    : 'text-ghotso-text-muted hover:text-ghotso-text hover:bg-ghotso-bg-secondary/30'
-                }`}
-              >
-                {item.label}
-                {isActive(item.href) && (
-                  <>
-                    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-ghotso-primary rounded-full shadow-glow-primary" />
-                    <span className="absolute inset-0 rounded-lg bg-ghotso-primary/5" />
-                  </>
-                )}
-              </Link>
+              <motion.div key={item.href} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href={item.href}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                    isActive(item.href)
+                      ? 'text-ghotso-primary bg-ghotso-bg-secondary/50'
+                      : 'text-ghotso-text-muted hover:text-ghotso-text hover:bg-ghotso-bg-secondary/30'
+                  }`}
+                >
+                  {item.label}
+                  {isActive(item.href) && (
+                    <motion.span
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-ghotso-primary rounded-full shadow-glow-primary"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <motion.span
+                    className="absolute inset-0 rounded-lg bg-ghotso-primary/5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isActive(item.href) ? 1 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                </Link>
+              </motion.div>
             ))}
           </div>
 
@@ -115,33 +124,50 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`md:hidden border-t border-white/10 bg-ghotso-panel/98 overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="px-4 py-3 space-y-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`block px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
-                isActive(item.href)
-                  ? 'text-ghotso-primary bg-ghotso-bg-secondary shadow-glow-primary/20'
-                  : 'text-ghotso-text-muted hover:text-ghotso-text hover:bg-ghotso-bg-secondary/50'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <div className="pt-2 border-t border-white/10 mt-2">
-            <div className="px-4 py-2">
-              <LanguageSwitcher />
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden border-t border-white/10 bg-ghotso-panel/98 overflow-hidden"
+          >
+            <div className="px-4 py-3 space-y-1">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.05, duration: 0.2 }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      isActive(item.href)
+                        ? 'text-ghotso-primary bg-ghotso-bg-secondary shadow-glow-primary/20'
+                        : 'text-ghotso-text-muted hover:text-ghotso-text hover:bg-ghotso-bg-secondary/50'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: navItems.length * 0.05, duration: 0.2 }}
+                className="pt-2 border-t border-white/10 mt-2"
+              >
+                <div className="px-4 py-2">
+                  <LanguageSwitcher />
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
