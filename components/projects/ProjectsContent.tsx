@@ -34,14 +34,6 @@ export default function ProjectsContent() {
       status: 'active' as const,
       githubUrl: 'https://github.com/ghotso/n8n-nodes-t0ggles',
     },
-    {
-      id: 'priobox',
-      title: 'PrioBox',
-      description: 'An Android email client designed around clarity and focus. Supports multiple IMAP accounts, VIP-only notifications, and a minimalist Jetpack Compose interface.',
-      tags: ['api'],
-      status: 'wip' as const,
-      githubUrl: 'https://github.com/ghotso/PrioBox',
-    },
   ];
 
   const allTags = Array.from(

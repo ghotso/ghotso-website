@@ -27,7 +27,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const repoName = getRepoName(project.githubUrl);
 
   // Projects that should not show version badge
-  const projectsWithoutVersion = ['PrioBox', 'ShelfLife'];
+  const projectsWithoutVersion = ['ShelfLife'];
   const showVersionBadge = repoName && !projectsWithoutVersion.includes(repoName);
 
   const statusColors = {
