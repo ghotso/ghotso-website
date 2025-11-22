@@ -58,7 +58,9 @@
       "api": "API",
       "monitoring": "Monitoring",
       "home-server": "Home Server",
-      "media": "Media Server"
+      "media": "Media Server",
+      "hardware": "Hardware",
+      "filament": "Filament"
     },
     "status": {
       "active": "Active",

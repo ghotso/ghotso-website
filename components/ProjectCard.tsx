@@ -29,8 +29,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const repoName = getRepoName(project.githubUrl);
 
   // Projects that should not show version badge
-  const projectsWithoutVersion = ['ShelfLife'];
+  const projectsWithoutVersion: string[] = [];
   const showVersionBadge = repoName && !projectsWithoutVersion.includes(repoName);
+
+  // Projects that should not show any shields/badges (e.g. new projects)
+  const projectsWithoutBadges = ['SpoolDB'];
+  const showBadges = repoName && !projectsWithoutBadges.includes(repoName);
 
   const statusColors = {
     active: 'bg-success/20 text-success border-success/30',
@@ -69,8 +73,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         ))}
       </div>
 
-      {/* Shields badges */}
-      {repoName && (
+      {/* Shields badges (can be disabled per-project via `projectsWithoutBadges`) */}
+      {showBadges && (
         <div className="flex items-center gap-2 mt-3 mb-4">
           {showVersionBadge && (
             <img

@@ -11,12 +11,12 @@ export default function ProjectsContent() {
 
   const allProjects = [
     {
-      id: 'shelflife',
-      title: 'ShelfLife',
-      description: 'A self-hosted tool that automatically maintains Plex libraries using rule-based automation. Features a fully managed form-based UI with no manual configuration or .env files required.',
-      tags: ['media', 'automation'],
+      id: 'spooldb',
+      title: 'SpoolDB',
+      description: 'A filament management system for hobby 3D printers and power users.',
+      tags: ['hardware', 'filament'],
       status: 'wip' as const,
-      githubUrl: 'https://github.com/ghotso/ShelfLife',
+      githubUrl: 'https://github.com/ghotso/SpoolDB',
     },
     {
       id: 'has-pcloud-backup',
